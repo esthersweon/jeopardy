@@ -1,0 +1,8 @@
+.Board {
+  display: flex;
+  padding: 20px;
+}
+
+.Category {
+  flex: 1;
+}
