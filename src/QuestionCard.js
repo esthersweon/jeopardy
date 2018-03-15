@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import './Card.css';
+import './QuestionCard.css';
 
-class Card extends Component {
+class QuestionCard extends Component {
   constructor() {
     super()
     this.state = {
@@ -10,21 +10,23 @@ class Card extends Component {
     this.flipCard = this.flipCard.bind(this)
   }
   flipCard() {
-    if (this.state.status == 'default') {
-      this.setState({ status: 'flipped' })
-    } else if (this.state.status == 'flipped') {
-      this.setState({ status: 'revealed' })
-    } else {
-      this. setState({ status: 'disabled' })
+    if (this.props.playMode) {
+      if (this.state.status == 'default') {
+        this.setState({ status: 'flipped' })
+      } else if (this.state.status == 'flipped') {
+        this.setState({ status: 'revealed' })
+      } else {
+        this. setState({ status: 'disabled' })
+      }
     }
   }
   render() {
     let displayMap = {
       'default': <span>{ this.props.points }</span>,
-      'flipped': <span>{ this.props.answer }</span>,
-      'revealed': <span>{ this.props.question }</span>,
+      'flipped': <span>{ this.props.text }</span>,
+      'revealed': <span>{ this.props.answer }</span>,
       'disabled': <span>{ this.props.points }</span>,
-      'notPlayMode': <span>{ this.props.points } - { this.props.answer } ({ this.props.question })</span> 
+      'notPlayMode': <span>{ this.props.points } - { this.props.text } ({ this.props.answer })</span> 
     }
     return (
       <div className={ `Card ${this.state.status}` } onClick={ this.flipCard }>
@@ -38,4 +40,4 @@ class Card extends Component {
   }
 }
 
-export default Card;
+export default QuestionCard;

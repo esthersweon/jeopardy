@@ -23,8 +23,8 @@ class App extends Component {
 
           <hr/>
 
-          <Route exact path="/" component={HomePage}/>
-          <Route path="/games/:game_id" component={GamePage}/>
+          <Route exact path="/" component={ HomePage }/>
+          <Route path="/games/:game_id" component={ GamePage }/>
         </div>
       </Router>
     );

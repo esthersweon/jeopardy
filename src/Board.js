@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Card from './Card';
+import Category from './Category';
 import './Board.css';
 
 class Board extends Component {
@@ -7,15 +7,9 @@ class Board extends Component {
     return (
       <div className="Board">
         { this.props.categories.map(category => {
-          return <div className="Category">
-            <h1>{ category.title }</h1>
-            { category.cards.map(card => {
-              return <Card 
-                playMode={ this.props.playMode }
-                points={ card.points } 
-                answer={ card.answer } 
-                question={ card.question } />
-            })}
+          return <div className="Category" key={ category.id }>
+            <h4>{ category.title }</h4>
+            <Category playMode={ this.props.playMode } categoryId={ category.id }/>
           </div>
         }) }
       </div>

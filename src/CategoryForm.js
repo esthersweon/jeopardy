@@ -26,7 +26,7 @@ class CategoryForm extends Component {
   render() {
     return (
       <div className="CategoryForm">
-        <h2>Add Category</h2>
+        <h3>Add Category</h3>
         <form id="add-category" onSubmit={ this.addCategory }>
           <div className="form-group">
             <input placeholder="Category Name" className="form-control" onChange={ this.changeCategoryTitle } />

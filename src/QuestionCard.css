@@ -1,15 +1,21 @@
 .Card {
+  font-size: 18px;
   padding: 10px;
   color: white;
   border: 1px solid lightblue;
   background-color: lightblue;
   border-radius: 10px;
   margin-top: 10px;
+  min-height: 50px;
 }
 
 .Card:hover {
-  border: 1px solid blue;
-  background-color: blue;
+  border: 2px solid teal;
+}
+
+.Card.flipped, .Card.revealed {
+    border: 1px solid teal;
+    background-color: teal;
 }
 
 .Card.disabled {
