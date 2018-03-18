@@ -1,4 +1,4 @@
-.Card {
+.QuestionCard {
   font-size: 18px;
   padding: 10px;
   color: white;
@@ -7,19 +7,28 @@
   border-radius: 10px;
   margin-top: 10px;
   min-height: 50px;
+  /*display: flex;*/
 }
 
-.Card:hover {
+.QuestionCard:hover {
   border: 2px solid teal;
   cursor: pointer;
 }
 
-.Card.flipped, .Card.revealed {
+.QuestionCard.flipped, .QuestionCard.revealed {
     border: 1px solid teal;
     background-color: teal;
 }
 
-.Card.disabled {
+.QuestionCard.disabled {
     border: 1px solid lightgray;
     background-color: lightgray;
 }
+
+/*.QuestionCard button.delete {
+  flex: 1;
+}
+
+.QuestionCard div {
+  flex: 19;
+}*/

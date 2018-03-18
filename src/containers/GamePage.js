@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Board from '../components/GamePage/Board';
 import CategoryForm from '../components/GamePage/CategoryForm';
-import QuestionForm from '../components/GamePage/QuestionForm';
+import AddQuestionForm from '../components/GamePage/AddQuestionForm';
 
 class App extends Component {
   constructor() {
@@ -81,6 +81,7 @@ class App extends Component {
       <div className="App-body container">
         <h2>{ this.state.title }</h2>
         <hr/>
+
         { 
           !this.state.isPlaying ? 
           <div>
@@ -89,20 +90,21 @@ class App extends Component {
                 <CategoryForm add={ this.addCategory } />
               </div>
               <div className="col-md-6">
-                <QuestionForm categories={ this.state.categories } add={ this.addQuestion } />
+                <AddQuestionForm categories={ this.state.categories } add={ this.addQuestion } />
               </div>
             </div>
           </div>
           : null
         }
-        <hr/>
-        <Board 
-          playMode={ this.state.isPlaying } 
-          categories={ this.state.categories }
-          deleteQuestion={ this.deleteQuestion }/>
+        
         <button onClick={ this.toggleIsPlaying } className="btn btn-info">
           { this.state.isPlaying ? 'Edit Game' : 'Start Game' }
         </button>
+
+        <Board 
+          playMode={ this.state.isPlaying } 
+          categories={ this.state.categories }
+          deleteQuestion={ this.deleteQuestion } />
       </div>
     );
   }

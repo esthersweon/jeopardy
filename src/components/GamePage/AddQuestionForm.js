@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class QuestionForm extends Component {
+class AddQuestionForm extends Component {
   constructor() {
     super();
     this.state = {
@@ -35,12 +35,12 @@ class QuestionForm extends Component {
   }
   render() {
     return (
-      <div className="QuestionForm">
+      <div className="AddQuestionForm">
         <h3>Add Question</h3>
         <form onSubmit={ this.addQuestion } id="add-question">
           <div className="form-group">
             { this.props.categories.map(category => {
-              return <div>
+              return <div key={ category.id }>
                 <input 
                   key={ category.id } 
                   type="radio" 
@@ -52,7 +52,7 @@ class QuestionForm extends Component {
           </div>
           <div className="form-group">
             { [100, 200, 300, 400, 500].map(opt => {
-                return <div>
+                return <div key={ opt }>
                   <input 
                     key={ opt } 
                     type="radio" 
@@ -68,11 +68,11 @@ class QuestionForm extends Component {
           <div className="form-group">
             <input placeholder="Answer" className="form-control" onChange={ this.modifyState('questionAnswer') } />
           </div>
-          <button type="submit" className="btn btn-primary">Add Card</button>
+          <button type="submit" className="btn btn-primary">Add Question</button>
         </form>
       </div>
     );
   }
 }
 
-export default QuestionForm;
+export default AddQuestionForm;

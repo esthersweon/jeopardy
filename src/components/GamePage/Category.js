@@ -16,13 +16,6 @@ class Category extends Component {
     })
   }
   render() {
-    let displayMap = {
-      'default': <span>{ this.props.points }</span>,
-      'flipped': <span>{ this.props.answer }</span>,
-      'revealed': <span>{ this.props.question }</span>,
-      'disabled': <span>{ this.props.points }</span>,
-      'notPlayMode': <span>{ this.props.points } - { this.props.answer } ({ this.props.question })</span> 
-    }
     return (
       <div>
         { this.state.questions.map(question => {

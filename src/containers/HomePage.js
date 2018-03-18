@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import GameList from '../components/HomePage/GameList';
+import GameForm from '../components/HomePage/GameForm';
 
 class HomePage extends Component {
   constructor() {
@@ -8,7 +9,10 @@ class HomePage extends Component {
     this.state = {
       games: []
     }
+
+    this.addGame = this.addGame.bind(this);
   }
+
   componentDidMount() {
     fetch('http://localhost:3000/api/games').then(res => {
       return res.json();
@@ -16,21 +20,27 @@ class HomePage extends Component {
       this.setState({ games })
     })
   }
+
+  addGame() {
+    fetch('http://localhost:3000/api/games', {
+      method: 'POST'
+    }).then(res => {
+      return res.json();
+    }).then(game => {
+      this.setState({ games: this.state.games.concat(game) })
+    })
+  }
+
   render() {
     return (
       <div className="App-body container">
-        <h2>Select a game to play:</h2>
-        <hr/>
-
         <div className="row">
-          <div className="col-md-6 offset-md-3">
-            <ul className="list-group">
-              { this.state.games.map(game => {
-                return <li className="list-group-item">
-                  <Link to={`/games/${ game.id }`}>{ game.title }</Link>
-                </li>
-              }) }
-            </ul>
+          <div className="col-md-6">
+            <GameList games={ this.state.games } />
+          </div>
+
+          <div className="col-md-6">
+            <GameForm add={ this.addGame }/>
           </div>
         </div>
       </div>
