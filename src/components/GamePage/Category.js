@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import QuestionCard from './QuestionCard';
 
@@ -32,7 +31,8 @@ class Category extends Component {
             playMode={ this.props.playMode }
             points={ question.points } 
             text={ question.text }
-            answer={ question.answer } />
+            answer={ question.answer } 
+            deleteQuestion={ this.props.deleteQuestion } />
         }) }
       </div>
     );

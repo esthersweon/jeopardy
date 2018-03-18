@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Board from '../Board';
-import CategoryForm from '../CategoryForm';
-import QuestionForm from '../QuestionForm';
+import Board from '../components/GamePage/Board';
+import CategoryForm from '../components/GamePage/CategoryForm';
+import QuestionForm from '../components/GamePage/QuestionForm';
 
 class App extends Component {
   constructor() {
@@ -13,7 +13,8 @@ class App extends Component {
     }
     this.toggleIsPlaying = this.toggleIsPlaying.bind(this);
     this.addCategory = this.addCategory.bind(this);
-    this.addCard = this.addCard.bind(this);
+    this.addQuestion = this.addQuestion.bind(this);
+    this.deleteQuestion = this.deleteQuestion.bind(this);
   }
   componentDidMount() {
     let gameId = this.props.match.params.game_id;
@@ -52,7 +53,7 @@ class App extends Component {
       })
     }
   }
-  addCard(category = 'Category A', card = {points: 100, answer: 'Hypertext Markup Language', question: 'What is HTML?'}) {
+  addQuestion(category = 'Category A', card = {points: 100, answer: 'Hypertext Markup Language', question: 'What is HTML?'}) {
     // let allCategoryTitles = this.state.categories.map(category => category.title)
     // let clonedCategories = Object.assign(this.state.categories)
     // let categoryId = allCategoryTitles.indexOf(category)
@@ -60,6 +61,20 @@ class App extends Component {
     //   clonedCategories[categoryId].cards.push(card)
     //   this.setState({ categories: clonedCategories })
     // }
+  }
+  deleteQuestion() {
+    fetch('http://localhost:3000/api/categories/', {
+      method: 'POST',
+      body: JSON.stringify({ title: this.state.categoryTitle }),
+      headers: {
+        'content-type': 'application/json'
+      },
+    }).then(res => {
+      return res.json();
+    }).then(newCategory => {
+      debugger;
+      this.setState({categories: this.state.categories.concat([newCategory])})
+    })
   }
   render() {
     return (
@@ -74,14 +89,17 @@ class App extends Component {
                 <CategoryForm add={ this.addCategory } />
               </div>
               <div className="col-md-6">
-                <QuestionForm categories={ this.state.categories } add={ this.addCard } />
+                <QuestionForm categories={ this.state.categories } add={ this.addQuestion } />
               </div>
             </div>
           </div>
           : null
         }
         <hr/>
-        <Board playMode={ this.state.isPlaying } categories={ this.state.categories }/>
+        <Board 
+          playMode={ this.state.isPlaying } 
+          categories={ this.state.categories }
+          deleteQuestion={ this.deleteQuestion }/>
         <button onClick={ this.toggleIsPlaying } className="btn btn-info">
           { this.state.isPlaying ? 'Edit Game' : 'Start Game' }
         </button>

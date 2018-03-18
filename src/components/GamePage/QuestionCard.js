@@ -30,6 +30,7 @@ class QuestionCard extends Component {
     }
     return (
       <div className={ `Card ${this.state.status}` } onClick={ this.flipCard }>
+        { !this.props.playMode && <button onClick={ this.props.deleteQuestion }>X</button> }
         { 
           this.props.playMode ? 
           displayMap[this.state.status]

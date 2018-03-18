@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import './HomePage.css';
 import { Link } from 'react-router-dom';
 
 class HomePage extends Component {
@@ -19,15 +18,21 @@ class HomePage extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="App-body container">
         <h2>Select a game to play:</h2>
-        <ul>
-          { this.state.games.map(game => {
-            return <li>
-              <Link to={`/games/${ game.id }`}>{ game.title }</Link>
-            </li>
-          }) }
-        </ul>
+        <hr/>
+
+        <div className="row">
+          <div className="col-md-6 offset-md-3">
+            <ul className="list-group">
+              { this.state.games.map(game => {
+                return <li className="list-group-item">
+                  <Link to={`/games/${ game.id }`}>{ game.title }</Link>
+                </li>
+              }) }
+            </ul>
+          </div>
+        </div>
       </div>
     );
   }

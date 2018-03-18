@@ -9,7 +9,10 @@ class Board extends Component {
         { this.props.categories.map(category => {
           return <div className="Category" key={ category.id }>
             <h4>{ category.title }</h4>
-            <Category playMode={ this.props.playMode } categoryId={ category.id }/>
+            <Category 
+              playMode={ this.props.playMode } 
+              categoryId={ category.id }
+              deleteQuestion={ this.props.deleteQuestion } />
           </div>
         }) }
       </div>

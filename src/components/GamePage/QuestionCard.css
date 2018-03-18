@@ -11,6 +11,7 @@
 
 .Card:hover {
   border: 2px solid teal;
+  cursor: pointer;
 }
 
 .Card.flipped, .Card.revealed {
