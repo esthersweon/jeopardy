@@ -1,8 +1,17 @@
-.game-title {
+.GamePage .title {
   text-align: center;
 }
 
 button.game-toggle {
   display: block;
   margin: 20px auto;
+}
+
+.Board {
+  display: flex;
+  padding: 20px;
+}
+
+.Category {
+  flex: 1;
 }

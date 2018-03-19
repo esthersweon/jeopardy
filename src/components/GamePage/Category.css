@@ -1,0 +1,8 @@
+.Category {
+  padding: 0 10px;
+}
+
+.Category .controls {
+  display: flex;
+  justify-content: space-between;
+}

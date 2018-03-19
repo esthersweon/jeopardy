@@ -18,8 +18,8 @@ class AddCategoryForm extends Component {
   addCategory(e) {
     e.preventDefault();
     if (this.state.categoryTitle) {
-      this.props.add(this.state.categoryTitle)
-      this.setState({ categoryTitle: '' })
+      this.props.add(this.state.categoryTitle);
+      this.setState({ categoryTitle: '' });
       document.getElementById("add-category").reset();
     }
   }

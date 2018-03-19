@@ -8,10 +8,12 @@ class QuestionCard extends Component {
     this.state = {
       status: 'default',
       editMode: false
-    }
-    this.flipOrEditCard = this.flipOrEditCard.bind(this)
+    };
+
+    this.flipCard = this.flipCard.bind(this);
+    this.toggleEditForm = this.toggleEditForm.bind(this);
   }
-  flipOrEditCard() {
+  flipCard() {
     if (this.props.playMode) {
       if (this.state.status === 'default') {
         this.setState({ status: 'flipped' })
@@ -20,9 +22,10 @@ class QuestionCard extends Component {
       } else {
         this.setState({ status: 'disabled' })
       }
-    } else {
-      this.setState({ editMode: !this.state.editMode })
     }
+  }
+  toggleEditForm() {
+    this.setState({ editMode: !this.state.editMode })
   }
   render() {
     let displayMap = {
@@ -33,20 +36,25 @@ class QuestionCard extends Component {
       'notPlayMode': `${ this.props.points } - ${ this.props.text } (${ this.props.answer })`
     }
     return (
-      <div className={ `QuestionCard ${this.state.status}` } onClick={ this.flipOrEditCard }>
+      <div className={ `QuestionCard ${this.state.status}` } onClick={ this.flipCard }>
+        { 
+          !this.props.playMode && !this.state.editMode &&
+          <div className="controls">
+            <button className="btn btn-primary" onClick={ this.toggleEditForm }>
+              Edit
+            </button>
+            <button className="btn btn-danger" onClick={ this.props.delete }>
+              X
+            </button> 
+          </div>
+        }
         <div>
           { this.props.playMode && displayMap[this.state.status] }
           { 
             !this.props.playMode && 
-            (this.state.editMode ? <EditQuestionForm/> : displayMap.notPlayMode)
+            (this.state.editMode ? <EditQuestionForm edit={ this.props.edit } hide={ this.toggleEditForm } { ...this.props } /> : displayMap.notPlayMode)
           }
         </div>
-        { 
-          !this.props.playMode && !this.state.editMode &&
-          <button className="btn btn-danger delete" onClick={ this.props.deleteQuestion }>
-            X
-          </button> 
-        }
       </div>
     );
   }

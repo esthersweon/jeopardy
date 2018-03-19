@@ -4,8 +4,6 @@ class AddQuestionForm extends Component {
   constructor() {
     super();
     this.state = {
-      questionCategory: null,
-      questionPoints: null,
       questionText: '',
       questionAnswer: '',
     }
@@ -13,44 +11,31 @@ class AddQuestionForm extends Component {
   }
   addQuestion(e) {
     e.preventDefault();
-    this.props.add(this.state.questionCategory, {
-      points: this.state.questionPoints, 
-      answer: this.state.questionText, 
-      question: this.state.questionAnswer
+
+    this.props.add({
+      text: this.state.questionText, 
+      answer: this.state.questionAnswer
     })
 
     this.setState({
-      questionCategory: null,
-      questionPoints: null,
       questionText: '',
       questionAnswer: '',
     });
-    
-    document.getElementById("add-question").reset();
+
+    document.getElementById(`add-question-${ this.props.categoryId }`).reset();
   }
   modifyState(stateKey) {
     return (e) => {
-      this.setState({[stateKey]: e.target.value })
+      this.setState({[stateKey]: e.target.value });
     }
   }
   render() {
     return (
       <div className="AddQuestionForm">
-        <h3>Add Question</h3>
-        <form onSubmit={ this.addQuestion } id="add-question">
+        <form onSubmit={ this.addQuestion } id={`add-question-${ this.props.categoryId }`}>
           <div className="row">
             <div className="col-6">
               <div className="form-group">
-                { this.props.categories.map(category => {
-                  return <div key={ category.id }>
-                    <input 
-                      key={ category.id } 
-                      type="radio" 
-                      name="category-title" 
-                      onChange={ this.modifyState('questionCategory') }/>
-                    { category.title }
-                  </div>
-                }) }
               </div>
             </div>
             {/*<div className="col-6">
