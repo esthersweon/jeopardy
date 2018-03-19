@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './AddQuestionForm.css';
 
 class AddQuestionForm extends Component {
   constructor() {
@@ -42,7 +43,7 @@ class AddQuestionForm extends Component {
               <div className="form-group">
                 { [100, 200, 300, 400, 500].map(opt => {
                     return <div key={ opt }>
-                      <input 
+                      <textarea 
                         key={ opt } 
                         type="radio" 
                         name="points" 
@@ -54,10 +55,10 @@ class AddQuestionForm extends Component {
             </div>*/}
           </div>
           <div className="form-group">
-            <input placeholder="Question" className="form-control" onChange={ this.modifyState('questionText') } />
+            <textarea placeholder="Question" className="form-control" onChange={ this.modifyState('questionText') } />
           </div>
           <div className="form-group">
-            <input placeholder="Answer" className="form-control" onChange={ this.modifyState('questionAnswer') } />
+            <textarea placeholder="Answer" className="form-control" onChange={ this.modifyState('questionAnswer') } />
           </div>
           <button type="submit" className="btn btn-primary">Add Question</button>
         </form>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './EditQuestionForm.css';
 
 class EditQuestionForm extends Component {
   constructor() {
@@ -45,14 +46,14 @@ class EditQuestionForm extends Component {
               onChange={ this.modifyState('questionPoints') } />
           </div>
           <div className="form-group">
-            <input 
+            <textarea 
               defaultValue={ this.props.text }
               placeholder="Question" 
               className="form-control" 
               onChange={ this.modifyState('questionText') } />
           </div>
           <div className="form-group">
-            <input 
+            <textarea 
               defaultValue={ this.props.answer }
               placeholder="Answer" 
               className="form-control" 
