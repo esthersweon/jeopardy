@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import EditGameOrCategoryForm from '../common/EditGameOrCategoryForm';
+import './Game.css';
 
 class Game extends Component {
   constructor() {
@@ -22,10 +23,12 @@ class Game extends Component {
         {
           this.state.editMode ? 
           <EditGameOrCategoryForm edit={ this.props.edit } hide={ this.toggleEditForm } { ...this.props } />
-          : <div>
+          : <div className="Game">
             <Link to={`/games/${ this.props.gameId }`}>{ this.props.title }</Link>
-            <button className="btn btn-primary" onClick={ this.toggleEditForm }>Edit</button>
-            <button className="btn btn-danger" onClick={ this.props.delete }>X</button>
+            <div>
+              <button className="btn btn-primary" onClick={ this.toggleEditForm }>Edit</button>
+              <button className="btn btn-danger" onClick={ this.props.delete }>X</button>
+            </div>
           </div>
         }
       </li>

@@ -34,9 +34,13 @@ class HomePage extends Component {
     })
   }
 
-  addGame() {
+  addGame(gameTitle) {
     fetch('http://localhost:3000/api/games', {
-        method: 'POST'
+        method: 'POST',
+        body: JSON.stringify({ title: gameTitle }),
+        headers: {
+          'content-type': 'application/json'
+        },
       })
       .then(res => res.json())
       .then(game => {
@@ -91,7 +95,7 @@ class HomePage extends Component {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-md-6">
+            <div className="col-md-8">
               <h2>Select Game to Play</h2>
               <hr/>
 
@@ -108,7 +112,7 @@ class HomePage extends Component {
               </ul>
             </div>
 
-            <div className="col-md-6">
+            <div className="col-md-4">
               <GameForm add={ this.addGame }/>
             </div>
           </div>
