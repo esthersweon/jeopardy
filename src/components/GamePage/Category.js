@@ -96,6 +96,9 @@ class Category extends Component {
       <div className="Category">
         <div className="controls">
           { 
+            this.props.playMode && <h4>{ this.props.title }</h4>
+          }
+          { 
             !this.props.playMode && (this.state.editMode ?
               <EditCategoryForm edit={ this.props.edit } hide={ this.toggleEditForm } { ...this.props } />
               : <h4>{ this.props.title }</h4>)

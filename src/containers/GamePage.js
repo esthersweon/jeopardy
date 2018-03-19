@@ -30,17 +30,15 @@ class GamePage extends Component {
     return (
       <div className="GamePage">
         <h2 className="title">{ this.state.title }</h2>
-        <hr/>
-
-        <Board 
-          gameId={ this.props.match.params.game_id } 
-          playMode={ this.state.isPlaying } />
-
         <button 
           className="btn btn-success btn-lg game-toggle"
           onClick={ this.toggleIsPlaying } >
           { this.state.isPlaying ? 'Edit Game' : 'Start Game' }
         </button>
+
+        <Board 
+          gameId={ this.props.match.params.game_id } 
+          playMode={ this.state.isPlaying } />
       </div>
     );
   }
