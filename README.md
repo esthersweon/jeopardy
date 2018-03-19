@@ -32,7 +32,7 @@ Back-End
 - `body-parser`
 - `dotenv`
 - Sequelize (Postgres ORM)
-- Postgres
+- PostgreSQL
 
 ## Deployment
 - Front-end Heroku app [here](https://jeopardy-frontend.herokuapp.com/)
