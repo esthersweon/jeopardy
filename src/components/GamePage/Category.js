@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import EditCategoryForm from './EditCategoryForm';
 import QuestionCard from './QuestionCard';
 import AddQuestionForm from './AddQuestionForm';
 import './Category.css';
@@ -8,9 +9,10 @@ class Category extends Component {
     super();
     this.state = {
       questions: [],
-      questionToEdit: null
+      editMode: false
     };
 
+    this.toggleEditForm = this.toggleEditForm.bind(this);
     this.getQuestions = this.getQuestions.bind(this);
     this.sortQuestions = this.sortQuestions.bind(this);
     this.addQuestion = this.addQuestion.bind(this);
@@ -20,6 +22,10 @@ class Category extends Component {
 
   componentDidMount() {
     this.getQuestions();
+  }
+
+  toggleEditForm() {
+    this.setState({ editMode: !this.state.editMode })
   }
 
   getQuestions() {
@@ -33,7 +39,7 @@ class Category extends Component {
   sortQuestions(questions) {
     return questions.sort((a, b) => {
       return a.points === b.points ? 0 : a.points - b.points;
-    })
+    });
   }
 
   addQuestion(question) {
@@ -89,19 +95,27 @@ class Category extends Component {
     return (
       <div className="Category">
         <div className="controls">
-          <h4>{ this.props.title }</h4>
           { 
-            !this.props.playMode && 
-            <button className="btn btn-danger" onClick={ this.props.deleteCategory(this.props.categoryId) }>
-              X
-            </button> 
+            !this.props.playMode && (this.state.editMode ?
+              <EditCategoryForm edit={ this.props.edit } hide={ this.toggleEditForm } { ...this.props } />
+              : <h4>{ this.props.title }</h4>)
+          }
+          { 
+            !this.props.playMode && !this.state.editMode &&
+            <div className="controls">
+              <button className="btn btn-primary" onClick={ this.toggleEditForm }>
+                Edit
+              </button>
+              <button className="btn btn-danger" onClick={ this.props.delete }>
+                X
+              </button> 
+            </div>
           }
         </div>
         { this.state.questions.map(question => {
           return <QuestionCard 
             key={ question.id }
             playMode={ this.props.playMode }
-            editMode={ question.id === this.state.questionToEdit }
             edit={ this.editQuestion(question.id) }
             delete={ this.deleteQuestion(question.id) } 
             { ...question } />

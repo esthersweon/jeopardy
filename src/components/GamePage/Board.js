@@ -9,23 +9,35 @@ class Board extends Component {
       categories: []
     };
 
+    this.getCategories = this.getCategories.bind(this);
+    this.sortCategories = this.sortCategories.bind(this);
     this.addCategory = this.addCategory.bind(this);
+    this.editCategory = this.editCategory.bind(this);
     this.deleteCategory = this.deleteCategory.bind(this);
   }
 
   componentDidMount() {
+    this.getCategories();
+  }
+
+  getCategories() {
     fetch(`http://localhost:3000/api/games/${ this.props.gameId }/categories`)
       .then(res => res.json())
       .then(categories => {
-        this.setState({ categories });
+        this.setState({ categories: this.sortCategories(categories) });
       })
+  }
+
+  sortCategories(categories) {
+    return categories.sort((a, b) => {
+      return a.id === b.id ? 0 : a.id - b.id;
+    })
   }
 
   addCategory(category) {
     let allCategoryTitles = this.state.categories.map(category => category.title);
 
     if (allCategoryTitles.indexOf(category) === -1) {
-      console.log({ title: category });
       fetch(`http://localhost:3000/api/games/${ this.props.gameId }/categories/`, {
           method: 'POST',
           body: JSON.stringify({ title: category }),
@@ -36,6 +48,22 @@ class Board extends Component {
         .then(res => res.json())
         .then(newCategory => {
           this.setState({categories: this.state.categories.concat([newCategory])})
+        });
+    }
+  }
+
+  editCategory(categoryId) {
+    return (category) => {
+      fetch(`http://localhost:3000/api/categories/${ categoryId }`, {
+          method: 'PUT', 
+          body: JSON.stringify(category),
+          headers: {
+            'content-type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(categoryEdited => {
+          categoryEdited && this.getCategories();
         });
     }
   }
@@ -62,7 +90,8 @@ class Board extends Component {
               categoryId={ category.id } 
               playMode={ this.props.playMode } 
               title={ category.title }
-              deleteCategory={ this.deleteCategory }/>
+              edit={ this.editCategory(category.id) }
+              delete={ this.deleteCategory(category.id) }/>
           })
         }
 
