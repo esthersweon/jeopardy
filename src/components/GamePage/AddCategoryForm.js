@@ -31,13 +31,13 @@ class AddCategoryForm extends Component {
         <form id="add-category" onSubmit={ this.addCategory }>
           <div className="form-group">
             <input 
-              placeholder="Category Name" 
+              placeholder="Category Title" 
               className="form-control" 
               onChange={ this.changeCategoryTitle } />
           </div>
 
           <button type="submit" className="btn btn-primary">
-            Add Category
+            Submit
           </button>
         </form>
       </div>
