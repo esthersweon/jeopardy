@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-class EditCategoryForm extends Component {
+class EditGameOrCategoryForm extends Component {
   constructor() {
     super();
     this.state = {
       categoryTitle: ''
     };
 
-    this.editCategory = this.editCategory.bind(this);
+    this.editModel = this.editModel.bind(this);
     this.saveTitle = this.saveTitle.bind(this);
   }
 
-  editCategory(e) {
+  editModel(e) {
     e.preventDefault();
     this.props.edit({
       title: this.state.categoryTitle || this.props.title
@@ -23,7 +23,7 @@ class EditCategoryForm extends Component {
 
     this.props.hide();
     
-    document.getElementById("edit-question").reset();
+    document.getElementById("edit-model").reset();
   }
 
   saveTitle(e) {
@@ -32,8 +32,8 @@ class EditCategoryForm extends Component {
 
   render() {
     return (
-      <div className="EditCategoryForm">
-        <form onSubmit={ this.editCategory } id="edit-question">
+      <div className="EditGameOrCategory">
+        <form onSubmit={ this.editModel } id="edit-model">
           <div className="form-group">
             <input 
               defaultValue={ this.props.title }
@@ -53,4 +53,4 @@ class EditCategoryForm extends Component {
   }
 }
 
-export default EditCategoryForm;
+export default EditGameOrCategoryForm;

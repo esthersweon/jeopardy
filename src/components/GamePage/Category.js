@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import EditCategoryForm from './EditCategoryForm';
+import EditGameOrCategoryForm from '../common/EditGameOrCategoryForm';
 import QuestionCard from './QuestionCard';
 import AddQuestionForm from './AddQuestionForm';
 import './Category.css';
@@ -100,7 +100,7 @@ class Category extends Component {
           }
           { 
             !this.props.playMode && (this.state.editMode ?
-              <EditCategoryForm edit={ this.props.edit } hide={ this.toggleEditForm } { ...this.props } />
+              <EditGameOrCategoryForm edit={ this.props.edit } hide={ this.toggleEditForm } { ...this.props } />
               : <h4>{ this.props.title }</h4>)
           }
           { 

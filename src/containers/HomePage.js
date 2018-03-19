@@ -10,7 +10,9 @@ class HomePage extends Component {
     };
 
     this.getGames = this.getGames.bind(this);
+    this.sortGames = this.sortGames.bind(this);
     this.addGame = this.addGame.bind(this);
+    this.editGame = this.editGame.bind(this);
     this.deleteGame = this.deleteGame.bind(this);
   }
 
@@ -22,8 +24,14 @@ class HomePage extends Component {
     fetch('http://localhost:3000/api/games')
       .then(res => res.json())
       .then(games => {
-        this.setState({ games })
+        this.setState({ games: this.sortGames(games) })
       });
+  }
+
+  sortGames(games) {
+    return games.sort((a, b) => {
+      return a.id === b.id ? 0 : a.id - b.id;
+    })
   }
 
   addGame() {
@@ -34,6 +42,24 @@ class HomePage extends Component {
       .then(game => {
         this.setState({ games: this.state.games.concat(game) })
       });
+  }
+
+  editGame(gameId) {
+    return (game) => {
+      fetch(`http://localhost:3000/api/games/${ gameId }`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(game)
+        })
+        .then(res => res.json())
+        .then(gameEdited => {
+          if (gameEdited) {
+            this.getGames();
+          }
+        });
+    }
   }
 
   deleteGame(gameId) {
@@ -75,6 +101,7 @@ class HomePage extends Component {
                     key={ game.id} 
                     gameId={ game.id } 
                     title={ game.title } 
+                    edit={ this.editGame(game.id) }
                     delete={ this.deleteGame(game.id) }/>
                   })
                 }
