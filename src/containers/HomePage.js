@@ -33,14 +33,23 @@ class HomePage extends Component {
 
   render() {
     return (
-      <div className="App-body container">
-        <div className="row">
-          <div className="col-md-6">
-            <GameList games={ this.state.games } />
-          </div>
+      <div>
+        <div className="jumbotron App-header">
+          <h1 className="display-4">Jeopardy</h1>
+          <p className="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+          <hr className="my-4"/>
 
-          <div className="col-md-6">
-            <GameForm add={ this.addGame }/>
+          <p className="lead">It uses utility classNames for typography and spacing to space content out within the larger container.</p>
+        </div>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-6">
+              <GameList games={ this.state.games } />
+            </div>
+
+            <div className="col-md-6">
+              <GameForm add={ this.addGame }/>
+            </div>
           </div>
         </div>
       </div>

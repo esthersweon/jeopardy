@@ -38,29 +38,35 @@ class AddQuestionForm extends Component {
       <div className="AddQuestionForm">
         <h3>Add Question</h3>
         <form onSubmit={ this.addQuestion } id="add-question">
-          <div className="form-group">
-            { this.props.categories.map(category => {
-              return <div key={ category.id }>
-                <input 
-                  key={ category.id } 
-                  type="radio" 
-                  name="category-title" 
-                  onChange={ this.modifyState('questionCategory') }/>
-                { category.title }
+          <div className="row">
+            <div className="col-6">
+              <div className="form-group">
+                { this.props.categories.map(category => {
+                  return <div key={ category.id }>
+                    <input 
+                      key={ category.id } 
+                      type="radio" 
+                      name="category-title" 
+                      onChange={ this.modifyState('questionCategory') }/>
+                    { category.title }
+                  </div>
+                }) }
               </div>
-            }) }
-          </div>
-          <div className="form-group">
-            { [100, 200, 300, 400, 500].map(opt => {
-                return <div key={ opt }>
-                  <input 
-                    key={ opt } 
-                    type="radio" 
-                    name="points" 
-                    onChange={ this.modifyState('questionPoints') } />
-                  { opt }
-                </div>
-            }) }
+            </div>
+            {/*<div className="col-6">
+              <div className="form-group">
+                { [100, 200, 300, 400, 500].map(opt => {
+                    return <div key={ opt }>
+                      <input 
+                        key={ opt } 
+                        type="radio" 
+                        name="points" 
+                        onChange={ this.modifyState('questionPoints') } />
+                      { opt }
+                    </div>
+                }) }
+              </div>
+            </div>*/}
           </div>
           <div className="form-group">
             <input placeholder="Question" className="form-control" onChange={ this.modifyState('questionText') } />

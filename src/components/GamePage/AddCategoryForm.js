@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 
-class CategoryForm extends Component {
+class AddCategoryForm extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       categoryTitle: ''
-    }
+    };
+
     this.changeCategoryTitle = this.changeCategoryTitle.bind(this);
     this.addCategory = this.addCategory.bind(this);
   }
@@ -22,19 +23,26 @@ class CategoryForm extends Component {
       document.getElementById("add-category").reset();
     }
   }
+
   render() {
     return (
-      <div className="CategoryForm">
+      <div>
         <h3>Add Category</h3>
         <form id="add-category" onSubmit={ this.addCategory }>
           <div className="form-group">
-            <input placeholder="Category Name" className="form-control" onChange={ this.changeCategoryTitle } />
+            <input 
+              placeholder="Category Name" 
+              className="form-control" 
+              onChange={ this.changeCategoryTitle } />
           </div>
-          <button type="submit" className="btn btn-primary">Add Category</button>
+
+          <button type="submit" className="btn btn-primary">
+            Add Category
+          </button>
         </form>
       </div>
     );
   }
 }
 
-export default CategoryForm;
+export default AddCategoryForm;

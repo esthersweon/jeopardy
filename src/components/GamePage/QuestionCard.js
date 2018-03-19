@@ -13,12 +13,12 @@ class QuestionCard extends Component {
   }
   flipOrEditCard() {
     if (this.props.playMode) {
-      if (this.state.status == 'default') {
+      if (this.state.status === 'default') {
         this.setState({ status: 'flipped' })
-      } else if (this.state.status == 'flipped') {
+      } else if (this.state.status === 'flipped') {
         this.setState({ status: 'revealed' })
       } else {
-        this. setState({ status: 'disabled' })
+        this.setState({ status: 'disabled' })
       }
     } else {
       this.setState({ editMode: !this.state.editMode })
@@ -43,7 +43,7 @@ class QuestionCard extends Component {
         </div>
         { 
           !this.props.playMode && !this.state.editMode &&
-          <button className="delete" onClick={ this.props.deleteQuestion }>
+          <button className="btn btn-danger delete" onClick={ this.props.deleteQuestion }>
             X
           </button> 
         }

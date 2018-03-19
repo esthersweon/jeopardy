@@ -1,0 +1,8 @@
+.game-title {
+  text-align: center;
+}
+
+button.game-toggle {
+  display: block;
+  margin: 20px auto;
+}

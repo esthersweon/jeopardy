@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Board from '../components/GamePage/Board';
-import CategoryForm from '../components/GamePage/CategoryForm';
+import AddCategoryForm from '../components/GamePage/AddCategoryForm';
 import AddQuestionForm from '../components/GamePage/AddQuestionForm';
+import './GamePage.css';
 
 class App extends Component {
   constructor() {
@@ -37,15 +38,21 @@ class App extends Component {
     this.setState({ isPlaying: !this.state.isPlaying });
   }
   addCategory(category) {
-    let allCategoryTitles = this.state.categories.map(category => category.title)
-    if (allCategoryTitles.indexOf(category) === -1) {
-      fetch('http://localhost:3000/api/categories/', {
+    let allCategoryTitles = this.state.categories.map(category => category.title);
+    let categoryTitle = category.trim();
+    debugger;
+
+    if (allCategoryTitles.indexOf(categoryTitle) === -1) {
+      let gameId = this.props.match.params.game_id;
+
+      fetch(`http://localhost:3000/api/games/${ gameId }/categories/`, {
         method: 'POST',
-        body: JSON.stringify({ title: this.state.categoryTitle }),
+        body: JSON.stringify({ title: categoryTitle }),
         headers: {
           'content-type': 'application/json'
-        },
+        }
       }).then(res => {
+        debugger;
         return res.json();
       }).then(newCategory => {
         debugger;
@@ -78,16 +85,15 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="App-body container">
-        <h2>{ this.state.title }</h2>
-        <hr/>
+      <div className="container">
+        <h2 className="game-title">{ this.state.title }</h2>
 
         { 
           !this.state.isPlaying ? 
           <div>
             <div className="row">
               <div className="col-md-6">
-                <CategoryForm add={ this.addCategory } />
+                <AddCategoryForm add={ this.addCategory } />
               </div>
               <div className="col-md-6">
                 <AddQuestionForm categories={ this.state.categories } add={ this.addQuestion } />
@@ -97,9 +103,11 @@ class App extends Component {
           : null
         }
         
-        <button onClick={ this.toggleIsPlaying } className="btn btn-info">
+        <button onClick={ this.toggleIsPlaying } className="btn btn-success btn-lg game-toggle">
           { this.state.isPlaying ? 'Edit Game' : 'Start Game' }
         </button>
+
+        <hr/>
 
         <Board 
           playMode={ this.state.isPlaying } 
