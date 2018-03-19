@@ -14,7 +14,7 @@ class GamePage extends Component {
   }
 
   componentDidMount() {
-    fetch(`http://localhost:3000/api/games/${ this.props.match.params.game_id }`)
+    fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games/${ this.props.match.params.game_id }`)
       .then(res => {
         return res.json();
       }).then(game => {

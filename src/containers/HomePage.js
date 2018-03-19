@@ -21,7 +21,7 @@ class HomePage extends Component {
   }
 
   getGames() {
-    fetch('http://localhost:3000/api/games')
+    fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games`)
       .then(res => res.json())
       .then(games => {
         this.setState({ games: this.sortGames(games) })
@@ -35,7 +35,7 @@ class HomePage extends Component {
   }
 
   addGame(gameTitle) {
-    fetch('http://localhost:3000/api/games', {
+    fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games`, {
         method: 'POST',
         body: JSON.stringify({ title: gameTitle }),
         headers: {
@@ -50,7 +50,7 @@ class HomePage extends Component {
 
   editGame(gameId) {
     return (game) => {
-      fetch(`http://localhost:3000/api/games/${ gameId }`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games/${ gameId }`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'
@@ -68,7 +68,7 @@ class HomePage extends Component {
 
   deleteGame(gameId) {
     return () => {
-      fetch(`http://localhost:3000/api/games/${ gameId }`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games/${ gameId }`, {
           method: 'DELETE',
           headers: {
             'content-type': 'application/json'

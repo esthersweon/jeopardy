@@ -29,7 +29,7 @@ class Category extends Component {
   }
 
   getQuestions() {
-    fetch(`http://localhost:3000/api/categories/${ this.props.categoryId }/questions`).then(res => {
+    fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/categories/${ this.props.categoryId }/questions`).then(res => {
       return res.json();
     }).then(questions => {
       this.setState({ questions: this.sortQuestions(questions) });
@@ -43,7 +43,7 @@ class Category extends Component {
   }
 
   addQuestion(question) {
-    fetch(`http://localhost:3000/api/categories/${ this.props.categoryId }/questions`, {
+    fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/categories/${ this.props.categoryId }/questions`, {
       method: 'POST',
       body: JSON.stringify({ 
         categoryId: this.props.categoryId,
@@ -62,7 +62,7 @@ class Category extends Component {
 
   editQuestion(questionId) {
     return (question) => {
-      fetch(`http://localhost:3000/api/questions/${ questionId }`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/questions/${ questionId }`, {
           method: 'PUT',
           body: JSON.stringify(question),
           headers: {
@@ -79,7 +79,7 @@ class Category extends Component {
 
   deleteQuestion(questionId) {
     return () => {
-      fetch(`http://localhost:3000/api/questions/${ questionId }`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/questions/${ questionId }`, {
           method: 'DELETE'
         })
         .then(res => res.json())

@@ -21,7 +21,7 @@ class Board extends Component {
   }
 
   getCategories() {
-    fetch(`http://localhost:3000/api/games/${ this.props.gameId }/categories`)
+    fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games/${ this.props.gameId }/categories`)
       .then(res => res.json())
       .then(categories => {
         this.setState({ categories: this.sortCategories(categories) });
@@ -38,7 +38,7 @@ class Board extends Component {
     let allCategoryTitles = this.state.categories.map(category => category.title);
 
     if (allCategoryTitles.indexOf(category) === -1) {
-      fetch(`http://localhost:3000/api/games/${ this.props.gameId }/categories/`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/games/${ this.props.gameId }/categories/`, {
           method: 'POST',
           body: JSON.stringify({ title: category }),
           headers: {
@@ -54,7 +54,7 @@ class Board extends Component {
 
   editCategory(categoryId) {
     return (category) => {
-      fetch(`http://localhost:3000/api/categories/${ categoryId }`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/categories/${ categoryId }`, {
           method: 'PUT', 
           body: JSON.stringify(category),
           headers: {
@@ -70,7 +70,7 @@ class Board extends Component {
 
   deleteCategory(categoryId) {
     return () => {
-      fetch(`http://localhost:3000/api/categories/${ categoryId }`, {
+      fetch(`${ process.env.REACT_APP_BACKEND_URL }/api/categories/${ categoryId }`, {
           method: 'DELETE'
         })
         .then(res => res.json())
